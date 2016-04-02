@@ -1,8 +1,8 @@
 class Toy < ActiveRecord::Base
 	TYPES = ["string", "yarnball", "mouse"]
 
-	validates :cat_id, :name, :type, presence: true
-	validates :type, includsion: TYPES
+	validates :cat_id, :name, :ttype, presence: true
+	validates :ttype, inclusion: TYPES
 
-	belongs_to: cat
+	belongs_to :cat
 end

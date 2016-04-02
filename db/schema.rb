@@ -19,10 +19,12 @@ ActiveRecord::Schema.define(version: 20160402205038) do
     t.datetime "updated_at"
   end
 
+  add_index "cats", ["name"], name: "index_cats_on_name"
+
   create_table "toys", force: :cascade do |t|
     t.integer  "cat_id",     null: false
     t.string   "name",       null: false
-    t.string   "type",       null: false
+    t.string   "ttype",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
