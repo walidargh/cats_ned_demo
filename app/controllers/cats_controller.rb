@@ -1,12 +1,15 @@
 class CatsController < ApplicationController
 	def index
 		#GET /cats
-		self.render json: Cat.all
+		# app/views/cat/index.html
+		@cats = Cat.all
+		render :index
 	end
 
 	def show
 		#GET /cats/123
-		self.render json: Cat.find(self.params[:id])
+		@cat = Cat.find(params[:id ])
+		render :show
 	end
 
 	def create
