@@ -1,5 +1,5 @@
 class Cat < ActiveRecord::Base
-	validates :name, presence: true
+	validates :name, :skill, presence: true
 
 	has_many :toys
 
