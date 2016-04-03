@@ -19,13 +19,28 @@
 				 id="cat_name"
 				 value= "<%=cat.name%>">
 	<br>
-
 	<label for="cat_skill">Skill</label><br>
 	<input type="skill"
 				 name="cat[skill]"
 				 id="cat_skill"
 				 value= "<%=cat.skill%>">
-
 	<br>
+
+	<% Cat::COAT_COLORS.each do |coat_color| %>
+		<label>
+			<input
+				type="radio"
+				name="cat[coat_color]"
+				value= "<%= coat_color %>"
+				<%= "checked" if cat.coat_color == coat_color %>>
+			<%= coat_color.titleize %>
+		</label>
+	<% end %>
+	<br>
+
+	<label for="cat_description">Description</label><br>
+		<textarea name="cat[description]" id="cat_description"><%= cat.description %>
+		</textarea>
+		<br>
 	<input type="submit", value="<%= submit_text %>">
 </form>
