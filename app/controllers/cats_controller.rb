@@ -26,9 +26,9 @@ class CatsController < ApplicationController
 		@cat = Cat.new(cat_params)
 
 		if @cat.save
-			params[:cat][:tag_ids].each do |tag_id|
-				Tagging.create!(cat_id: @cat.id, tag_id: tag_id)
-			end
+			# params[:cat][:tag_ids].each do |tag_id|
+			# 	Tagging.create!(cat_id: @cat.id, tag_id: tag_id)
+			# end
 
 			flash[:notice] = "Created #{@cat.name}"
 			# render json: cat
@@ -89,6 +89,8 @@ class CatsController < ApplicationController
 	private
 
 	def cat_params
-		params.require(:cat).permit(:name, :skill, :coat_color, :description)
+		params.require(:cat).permit(
+		:name, :skill, :coat_color, :description, tag_ids: []
+		)
 	end
 end

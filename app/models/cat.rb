@@ -4,7 +4,7 @@ class Cat < ActiveRecord::Base
 	validates :coat_color, inclusion: COAT_COLORS
 
 	has_many :toys
-	has_many :taggings, dependent: :destroy
+	has_many :taggings, dependent: :destroy, inverse_of: :cat
 	has_many :tags, through: :taggings
 	# Cat#tags
 	# Cat#tag_ids
