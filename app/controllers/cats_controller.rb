@@ -2,7 +2,13 @@ class CatsController < ApplicationController
 	def index
 		#GET /cats
 		# app/views/cat/index.html
-		@cats = Cat.all
+		# @cats = Cat.all
+		# render :index
+		if params[:tag]
+			@cats = Tag.find_by(name: params[:tag]).cats
+		else
+			@cats = Cats.all
+		end
 		render :index
 	end
 
