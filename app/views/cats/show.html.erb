@@ -2,6 +2,15 @@
 
 <pre><%= @cat.to_json %></pre>
 
+<h3>Tags</h3>
+<ul>
+	<% @cat.tags.each do |tag| %>
+		<li><%= tag.name  %></li>
+	<% end %>
+</ul>
+
+
+<h3>Toys</h3>
 <ul>
 	<% @cat.toys.each do |toy| %>
 		<li><%= toy.name %></li>
