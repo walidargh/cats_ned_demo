@@ -1,6 +1,14 @@
-<% action_url =  @cat.persisted? ? cat_url(@cat) : cats_url%>
-<% form_method = @cat.persisted? ? "PATCH" : "POST"%>
-<% submit_text = @cat.persisted? ? "Update Cat!" : "Create Cat!"%>
+<% action_url =  cat.persisted? ? cat_url(cat) : cats_url%>
+<% form_method = cat.persisted? ? "PATCH" : "POST"%>
+<% submit_text = cat.persisted? ? "Update Cat!" : "Create Cat!"%>
+
+<% if !cat.errors.full_messages.empty? %>
+	<ul>
+		<% cat.errors.full_messages.each do |error_msg| %>
+			<li><%= error_msg %></li>
+		<% end %>
+	</ul>
+<% end %>
 
 <form action= "<%= action_url %>" method="POST">
 	<input type="hidden" name="_method" value="<%= form_method%>">
@@ -9,14 +17,14 @@
 	<input type="text"
 				 name="cat[name]"
 				 id="cat_name"
-				 value= "<%=@cat.name%>">
+				 value= "<%=cat.name%>">
 	<br>
 
 	<label for="cat_skill">Skill</label><br>
 	<input type="skill"
 				 name="cat[skill]"
 				 id="cat_skill"
-				 value= "<%=@cat.skill%>">
+				 value= "<%=cat.skill%>">
 
 	<br>
 	<input type="submit", value="<%= submit_text %>">
