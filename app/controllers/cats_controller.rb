@@ -23,7 +23,7 @@ class CatsController < ApplicationController
 		# Content-Length: ...
 		#
 		#{ "cat": {"name": "Sally"}}
-		@cat = Cat.new(params[:cat].permit(:name, :skill))
+		@cat = Cat.new(cat_params)
 		if @cat.save
 			# render json: cat
 			# render :show
@@ -51,9 +51,17 @@ class CatsController < ApplicationController
 
 	def update
 		# cats/:id/edit
+		@cat = Cat.find(params[:id])
+		if @cat.update(cat_params)
+			redirect_to cat_url(@cat)
+		else
+			render :edit
+		end
 	end
 
 	def edit
+		@cat = Cat.find(params[:id])
+		render :edit
 	end
 
 	def destroy
@@ -68,5 +76,11 @@ class CatsController < ApplicationController
 		# 	a destroy
 		# 4. Destroys the cat. Issues the redirect to the client.
 		# 5. Client GETS /cats
+	end
+
+	private
+
+	def cat_params
+		params.require(:cat).permit(:name, :skill)
 	end
 end

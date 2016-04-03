@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   # resources :toys
   # /toys/:id
   resources :toys, only: [:show, :create, :update, :destroy]
+
+  root to: redirect("/cats")
 end
