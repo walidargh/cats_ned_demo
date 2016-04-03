@@ -33,13 +33,21 @@ class ToysController < ApplicationController
 		# POST /cats/:cat_id/toys/
 		# POST /toys
 
-		toy = Toy.new(toy_params)
+		@toy = Toy.new(toy_params)
+		@cat = @toy.cat
 		# toy.cat_id = params[:cat_id]
-		if toy.save
-			render json: toy
+		if @toy.save
+			redirect_to cat_url(@cat)
 		else
-			render json: toy.errors.full_messages, status: :unprocessable_entity
+			# render json: toy.errors.full_messages, status: :unprocessable_entity
+			render :new
 		end
+	end
+
+	def new
+		@cat = Cat.find(params[:cat_id])
+		@toy = Toy.new
+		render
 	end
 
 
@@ -56,7 +64,7 @@ class ToysController < ApplicationController
 	private
 
 	def toy_params
-		self.params.permit(:toy).require(:cat_id, :name, :ttype)
+		self.params.require(:toy).permit(:cat_id, :name, :ttype)
 	end
 
 end
