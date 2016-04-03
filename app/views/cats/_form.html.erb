@@ -41,6 +41,16 @@
 	<label for="cat_description">Description</label><br>
 		<textarea name="cat[description]" id="cat_description"><%= cat.description %>
 		</textarea>
-		<br>
+	<br>
+
+	<b>Tags</b>
+	<br>
+	<% Tag.all.each do |tag| %>
+		<label>
+			<input type="checkbox" name="cat[tag_ids][]" value= "<%= tag.id %>">
+			<%= tag.name %>
+		</label>
+	<br>
+	<% end %>
 	<input type="submit", value="<%= submit_text %>">
 </form>

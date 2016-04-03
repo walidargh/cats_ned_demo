@@ -24,7 +24,12 @@ class CatsController < ApplicationController
 		#
 		#{ "cat": {"name": "Sally"}}
 		@cat = Cat.new(cat_params)
+
 		if @cat.save
+			params[:cat][:tag_ids].each do |tag_id|
+				Tagging.create!(cat_id: @cat.id, tag_id: tag_id)
+			end
+
 			flash[:notice] = "Created #{@cat.name}"
 			# render json: cat
 			# render :show
