@@ -25,6 +25,7 @@ class CatsController < ApplicationController
 		#{ "cat": {"name": "Sally"}}
 		@cat = Cat.new(cat_params)
 		if @cat.save
+			flash[:notice] = "Created #{@cat.name}"
 			# render json: cat
 			# render :show
 			redirect_to cat_url(@cat)
@@ -68,6 +69,8 @@ class CatsController < ApplicationController
 		# DELETE /cats/:id
 		cat = Cat.find(params[:id])
 		cat.destroy
+		# session[:notice] = "Deleted #{cat.name}"
+		flash[:notice] = "Deleted #{cat.name}"
 		redirect_to cats_url
 
 		# 1. GET /cats
